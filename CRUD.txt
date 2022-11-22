@@ -1,0 +1,82 @@
+Microsoft Windows [Version 10.0.19044.2251]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\LENOVO>mongosh
+Current Mongosh Log ID: 637b77aa0ee55a6342b80ce6
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.0
+Using MongoDB:          6.0.2
+Using Mongosh:          1.6.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2022-11-18T20:48:35.442+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+test> show dbs
+STUDENT_FILE     104.00 KiB
+admin             40.00 KiB
+config            72.00 KiB
+local             72.00 KiB
+sarath           120.00 KiB
+sarath_database   72.00 KiB
+test> db.createCollection("TelephoneDirectry")
+{ ok: 1 }
+test> db.dropDatabase('test')
+{ ok: 1, dropped: 'test' }
+TelephoneDirectory> db.contacts.insertMany([{name:'saraya',number:9585256452,adress:'gandhinagar,thirupaththur'},{name:'subash',number:9894808241,adress:'someshnager,karur'},{name:'deepika',number:9585246898,adress:'villivakkam,chennai'},{name:'sakthi',number:9841425672,adress:'vinayagarkulam,karur'}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("637bb29b7852b606deba8f8c"),
+    '1': ObjectId("637bb29b7852b606deba8f8d"),
+    '2': ObjectId("637bb29b7852b606deba8f8e"),
+    '3': ObjectId("637bb29b7852b606deba8f8f")
+  }
+}
+TelephoneDirectory> db.contacts.findOne()
+{
+  _id: ObjectId("637bafc17852b606deba8f8b"),
+  name: 'sarath',
+  number: 8098379899,
+  adress: 'Dharanampet,Gudiyattam'
+}
+
+TelephoneDirectory> db.contacts.findOne({name:'sakthi'})
+{
+  _id: ObjectId("637bb29b7852b606deba8f8f"),
+  name: 'sakthi',
+  number: 9841425672,
+  adress: 'vinayagarkulam,karur'
+}
+
+TelephoneDirectory> db.contacts.updateMany({name:'sarath'},{$set:{name:'subash'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+TelephoneDirectory> db.contacts.deleteOne({name:'Subash'})
+{ acknowledged: true, deletedCount: 0 }
+TelephoneDirectory> db.contacts.deleteMany({name:'Subash'})
+{ acknowledged: true, deletedCount: 0 }
+TelephoneDirectory> db.contacts.deleteOne({name:'sakthi'})
+{ acknowledged: true, deletedCount: 1 }
+TelephoneDirectory> db.contacts.deleteMany({name:'subash'})
+{ acknowledged: true, deletedCount: 2 }
+TelephoneDirectory> db.contacts.insertMany([{name:'saraya',number:9585256452,adress:'gandhinagar,thirupaththur'},
